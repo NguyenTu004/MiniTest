@@ -12,7 +12,7 @@ public class NhanVienPartTime extends NhanVien{
         this.gioLam = gioLam;
     }
 
-    public NhanVienPartTime(String maNV, String ten, int soDT, String email, double gioLam) {
+    public NhanVienPartTime(String maNV, String ten, String soDT, String email, double gioLam) {
         super(maNV, ten, soDT, email);
         this.gioLam = gioLam;
     }

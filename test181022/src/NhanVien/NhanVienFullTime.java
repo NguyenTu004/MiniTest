@@ -8,7 +8,7 @@ public class NhanVienFullTime extends NhanVien{
     public NhanVienFullTime() {
     }
 
-    public NhanVienFullTime(String maNV, String ten, int soDT, String email, double luong, double tienThuong, double tienPhat) {
+    public NhanVienFullTime(String maNV, String ten, String soDT, String email, double luong, double tienThuong, double tienPhat) {
         super(maNV, ten, soDT, email);
         this.luong = luong;
         this.tienThuong = tienThuong;

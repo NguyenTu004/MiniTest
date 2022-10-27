@@ -1,15 +1,17 @@
 package NhanVien;
 
-public class NhanVien {
+import java.io.Serializable;
+
+public class NhanVien implements Serializable {
     private String maNV;
     private String ten;
-    private int soDT;
+    private String soDT;
     private String email;
 
     public NhanVien() {
     }
 
-    public NhanVien(String maNV, String ten, int soDT, String email) {
+    public NhanVien(String maNV, String ten, String soDT, String email) {
         this.maNV = maNV;
         this.ten = ten;
         this.soDT = soDT;
@@ -32,11 +34,11 @@ public class NhanVien {
         this.ten = ten;
     }
 
-    public int getSoDT() {
+    public String getSoDT() {
         return soDT;
     }
 
-    public void setSoDT(int soDT) {
+    public void setSoDT(String soDT) {
         this.soDT = soDT;
     }
 

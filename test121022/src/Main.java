@@ -16,17 +16,17 @@ public class Main {
             System.out.println("Lua chon cua ban: ");
             choice = scanner.nextInt();
             switch (choice) {
-                case 1 -> {
+                case 1 : {
                     ProductManager.addProduct(scanner);
                     ProductManager.display();
                 }
-                case 2 -> {
+                case 2 : {
                     ProductManager.deleteProduct(scanner);
                     ProductManager.display();
                 }
-                case 3 -> ProductManager.updateProduct(scanner);
-                case 4 -> ProductManager.displayMaxPriceProduct();
-                case 5 -> ProductManager.display();
+                case 3 : ProductManager.updateProduct(scanner);
+                case 4 : ProductManager.displayMaxPriceProduct();
+                case 5 : ProductManager.display();
             }
         }while (choice!=0);
 
