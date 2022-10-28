@@ -14,7 +14,9 @@ public class Manager {
 
     static int index ;
     static boolean flag ;
-    public static void tinhLuong( List<NhanVien> list){
+
+
+    public static void tinhLuong(List<NhanVien> list){
         tinhLuongFullTime(list);
         tinhLuongPartTime(list);
     }
@@ -245,14 +247,19 @@ public class Manager {
     }
 
     private static void suaThongTinNVDangChu(Scanner scanner, List<NhanVien> list, int index,int choice) {
-        boolean flag;
-            flag = false;
             String text = scanner.nextLine();
             if (!Objects.equals(text, "")) {
                     switch (choice){
                         case 1: list.get(index).setTen(text);break;
                         case 2: list.get(index).setEmail(text);break;
-                        case 3: list.get(index).setSoDT(text);;break;
+                        case 3:
+                            try{
+                                int soDT =Integer.parseInt(text);
+                                list.get(index).setSoDT(text);break;
+                            }catch (Exception e){
+                                System.err.println("Nhap sai du lieu");
+                            }
+                            break;
                     }
             }
     }
@@ -326,5 +333,4 @@ public class Manager {
         }
         return list;
     }
-
 }
