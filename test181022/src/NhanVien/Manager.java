@@ -5,7 +5,6 @@ import java.io.*;
 import java.util.*;
 import java.lang.*;
 public class Manager {
-    public static final int LUONGTHEOGIO = 100000;
     static List<NhanVienFullTime> listNhanVienFullTime = new ArrayList<>();
     static List<NhanVienPartTime> listNhanVienPartTime = new ArrayList<>();
     static NhanVienFullTime nhanVien1 ;
@@ -36,7 +35,7 @@ public class Manager {
         double luongRead;
         double luongTongPartTime=0;
         for (NhanVienPartTime nhanVienPartTime : listNhanVienPartTime) {
-            luongRead = nhanVienPartTime.getGioLam() * LUONGTHEOGIO;
+            luongRead = nhanVienPartTime.tinhLuong();
             luongTongPartTime +=luongRead;
             System.out.println("Nhan Vien Part Time: " + nhanVienPartTime.getTen() + " : " + luongRead + " VND");
         }
@@ -47,7 +46,7 @@ public class Manager {
         double luongRead;
         double luongTongFullTime=0;
         for (NhanVienFullTime nhanVienFullTime : listNhanVienFullTime) {
-            luongRead = nhanVienFullTime.getLuong() + (nhanVienFullTime.getTienThuong() - nhanVienFullTime.getTienPhat());
+            luongRead = nhanVienFullTime.tinhLuong();
             System.out.println("Nhan vien Full Time: " + nhanVienFullTime.getTen() + " : " + luongRead + " VND");
             luongTongFullTime += luongRead;
         }
@@ -57,10 +56,10 @@ public class Manager {
         double luongTong=0;
         phanLoaiNhanVien(list);
         for (NhanVienPartTime nhanVienPartTime : listNhanVienPartTime) {
-            luongTong += nhanVienPartTime.getGioLam() * LUONGTHEOGIO;
+            luongTong += nhanVienPartTime.tinhLuong();
         }
         for (NhanVienFullTime nhanVienFulltTime : listNhanVienFullTime) {
-            luongTong += nhanVienFulltTime.getLuong() + (nhanVienFulltTime.getTienThuong() - nhanVienFulltTime.getTienPhat());
+            luongTong += nhanVienFulltTime.tinhLuong();
         }
         return luongTong;
     }

@@ -1,6 +1,6 @@
 package NhanVien;
 
-public class NhanVienFullTime extends NhanVien{
+public class NhanVienFullTime extends NhanVien implements TinhLuong{
     private double luong;
     private double tienThuong;
     private double tienPhat;
@@ -47,5 +47,10 @@ public class NhanVienFullTime extends NhanVien{
                 ", tienThuong=" + tienThuong +
                 ", tienPhat=" + tienPhat +
                 " }";
+    }
+
+    @Override
+    public double tinhLuong() {
+        return getLuong()+getTienThuong()-getTienPhat();
     }
 }
