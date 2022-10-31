@@ -1,6 +1,6 @@
 package NhanVien;
 
-public class NhanVienFullTime extends NhanVien implements TinhLuong{
+public class NhanVienFullTime extends NhanVien implements LuongNhanVien {
     private double luong;
     private double tienThuong;
     private double tienPhat;

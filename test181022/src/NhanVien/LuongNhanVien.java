@@ -1,5 +1,5 @@
 package NhanVien;
 
-public interface TinhLuong {
+public interface LuongNhanVien {
     double tinhLuong();
 }

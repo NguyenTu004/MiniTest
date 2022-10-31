@@ -2,10 +2,10 @@ package NhanVien;
 
 import java.util.*;
 
-import static NhanVien.Manager.*;
-
+import static NhanVien.Manager.readFile;
 public class Main {
     public static void main(String[] args) {
+        Manager manager = new Manager();
         List<NhanVien> list = readFile();
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -16,7 +16,7 @@ public class Main {
             System.out.println("2.Sua thong tin nhan vien: ");
             System.out.println("3.Xoa thong tin nhan vien: ");
             System.out.println("4.Luong tong: ");
-            System.out.println("5.Luong trung binh cua tat ca nhan vien: ");
+            System.out.println("5.Luong trung binh cua ca cong ty: ");
             System.out.println("6.Nhan vien full time yeu kem: ");
             System.out.println("7.Danh sach luong nhan vien full time tang dan: ");
             System.out.println("8.Hien thi danh sach nhan vien cong ti: ");
@@ -25,33 +25,31 @@ public class Main {
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1:
-                    add(scanner, list);
+                    manager.taoThongTinNhanVien(scanner, list);
                     break;
                 case 2:
-                    update(scanner, list);
+                    manager.suaThongTinNhanVien(scanner, list);
                     break;
                 case 3:
-                    delete(scanner, list);
+                    manager.xoaThongTinNhanVien(scanner, list);
                     break;
                 case 4:
-                    kiemTraLuong(list, scanner);
+                    manager.kiemTraLuongCaCongTy(list, scanner);
                     break;
                 case 5:
-                    double luongTB = Manager.luongTB(list);
+                    double luongTB = manager.luongTrungBinhCaCongTy(list);
                     System.out.println("Luong trung binh cua ca cong ti la: " + luongTB);
                     break;
                 case 6:
-                    nhanVienFullTimeYeuKem(list);
+                    manager.luongFullTimeThapHonLuongTrungBinh(list);
                     break;
                 case 7:
-                    sapXepNhanVienFullTime(list);
+                    manager.sapXepNhanVienFullTime(list);
                     break;
                 case 8:
-                    display(list);
+                    manager.hienThiThongTinCaCongTy(list);
                     break;
             }
         } while (choice != 0);
     }
-
-
 }

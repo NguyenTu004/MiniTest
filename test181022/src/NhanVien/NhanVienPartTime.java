@@ -1,9 +1,7 @@
 package NhanVien;
 
-import java.time.LocalDateTime;
-
-public class NhanVienPartTime extends NhanVien implements TinhLuong{
-    public static final int LUONGTHEOGIO = 100000;
+public class NhanVienPartTime extends NhanVien implements LuongNhanVien {
+    public static final int LUONG_THEO_GIO = 100000;
     private double gioLam;
 
     public NhanVienPartTime() {
@@ -36,6 +34,6 @@ public class NhanVienPartTime extends NhanVien implements TinhLuong{
 
     @Override
     public double tinhLuong() {
-        return getGioLam()*LUONGTHEOGIO;
+        return getGioLam()*LUONG_THEO_GIO;
     }
 }
