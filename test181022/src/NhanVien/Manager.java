@@ -4,22 +4,29 @@ import java.io.FileOutputStream;
 import java.io.*;
 import java.util.*;
 import java.lang.*;
+
+import static NhanVien.ManagerFullTime.listNhanVienFullTime;
+import static NhanVien.ManagerPartTime.listNhanVienPartTime;
+
 public class Manager {
-    public List<NhanVienFullTime> listNhanVienFullTime = new ArrayList<>();
-    public List<NhanVienPartTime> listNhanVienPartTime = new ArrayList<>();
+//    public List<NhanVienFullTime> listNhanVienFullTime = new ArrayList<>();
+//    public List<NhanVienPartTime> listNhanVienPartTime = new ArrayList<>();
     public NhanVienFullTime nhanVien1 ;
     public NhanVienPartTime nhanVien2 ;
     public static final String PATH_NHAN_VIEN ="C:\\Users\\ASUS\\Desktop\\Máy tính\\Test_Java\\test181022\\src\\NhanVien\\File_luu_tru\\nhanVien.txt";
     static int index ;
     static boolean flag ;
 
-    public void hienThiLuongCaCongTy(List<NhanVien> list){
-        tinhTongLuongFullTime(list);
-        tinhTongLuongPartTime(list);
+    public Manager() {
     }
+
+//    public void hienThiLuongCaCongTy(List<NhanVien> list){
+//        fullTime.tinhTongLuongFullTime(list);
+//        partTime.tinhTongLuongPartTime(list);
+//    }
     public void phanLoaiNhanVien( List<NhanVien> list){
-       listNhanVienFullTime.clear();
-       listNhanVienPartTime.clear();
+        listNhanVienFullTime.clear();
+        listNhanVienPartTime.clear();
         for (NhanVien nhanVien : list) {
             if (nhanVien instanceof NhanVienFullTime ) {
                 listNhanVienFullTime.add((NhanVienFullTime) nhanVien);
@@ -28,53 +35,17 @@ public class Manager {
             }
         }
     }
-    public double tinhTongLuongPartTime(List<NhanVien> list) {
-        phanLoaiNhanVien(list);
-        double luongRead;
-        double luongTongPartTime=0;
-        for (NhanVienPartTime nhanVienPartTime : listNhanVienPartTime) {
-            luongRead = nhanVienPartTime.tinhLuong();
-            luongTongPartTime +=luongRead;
-            System.out.println("Nhan Vien Part Time: " + nhanVienPartTime.getTen() + " : " + luongRead + " VND");
-        }
-        return luongTongPartTime;
-    }
-    public double tinhTongLuongFullTime(List<NhanVien> list) {
-        phanLoaiNhanVien(list);
-        double luongRead;
-        double luongTongFullTime=0;
-        for (NhanVienFullTime nhanVienFullTime : listNhanVienFullTime) {
-            luongRead = nhanVienFullTime.tinhLuong();
-            System.out.println("Nhan vien Full Time: " + nhanVienFullTime.getTen() + " : " + luongRead + " VND");
-            luongTongFullTime += luongRead;
-        }
-        return luongTongFullTime;
-    }
     public double luongTongCaCongTy( List<NhanVien> list){
-        double luongTongPartTime = tinhTongLuongPartTime(list);
-        double luongTongFullTime = tinhTongLuongFullTime(list);
+        ManagerPartTime partTime = new ManagerPartTime();
+        ManagerFullTime fullTime = new ManagerFullTime();
+        double luongTongPartTime = partTime.tinhTongLuongPartTime(list);
+        double luongTongFullTime = fullTime.tinhTongLuongFullTime(list);
         return luongTongFullTime+luongTongPartTime;
     }
     public double luongTrungBinhCaCongTy( List<NhanVien> list){
         double luongTong = luongTongCaCongTy(list);
         return  luongTong/list.size();
 
-    }
-    public void luongFullTimeThapHonLuongTrungBinh( List<NhanVien> list){
-        double luongTB = luongTrungBinhCaCongTy(list);
-        for (int i = 0; i < listNhanVienFullTime.size(); i++) {
-            if (listNhanVienFullTime.get(i).getLuong() < luongTB){
-                System.out.println("STT: "+(i+1)+" : "+" Nhan Vien Full Time yeu kem:\t Ten: " +listNhanVienFullTime.get(i).getTen()+"\t\t Luong: "+ listNhanVienFullTime.get(i).getLuong() + "VND");
-            }
-        }
-    }
-    public void sapXepNhanVienFullTime( List<NhanVien> list){
-        phanLoaiNhanVien(list);
-        SapXepNVFullTime sapXep = new SapXepNVFullTime();
-        Collections.sort(listNhanVienFullTime,sapXep);
-        for (NhanVienFullTime nhanVienFullTime : listNhanVienFullTime) {
-            System.out.println("Ten: " + nhanVienFullTime.getTen() + "\t\t Luong: " + nhanVienFullTime.getLuong());
-        }
     }
     public void hienThiThongTinCaCongTy( List<NhanVien> list){
         for (int i = 0; i < list.size(); i++) {
@@ -83,25 +54,31 @@ public class Manager {
     }
     public void kiemTraLuongCaCongTy(List<NhanVien> list, Scanner scanner) {
         int choice;
+        ManagerPartTime partTime = new ManagerPartTime();
+        ManagerFullTime fullTime = new ManagerFullTime();
         do {
-        System.out.println("1.Luong tong ca cong ti: ");
-        System.out.println("2.Luong tong cua nhan vien Full time: ");
-        System.out.println("3.Luong tong cua nhan vien Part time: ");
-        System.out.println("0.Thoát");
-        System.out.println("Lua chon cua ban: ");
+            System.out.println("1.Luong tong ca cong ti: ");
+            System.out.println("2.Luong tong cua nhan vien Full time: ");
+            System.out.println("3.Luong tong cua nhan vien Part time: ");
+            System.out.println("0.Thoát");
+            System.out.println("Lua chon cua ban: ");
         choice = Integer.parseInt(scanner.nextLine());
             switch (choice){
                 case 1:
-                    hienThiLuongCaCongTy(list);
-                    double luongTong = luongTongCaCongTy(list);
-                    System.out.println("Luong tong cua ca cong ti la: " + luongTong);
+//                    hienThiLuongCaCongTy(list);
+                    try {
+                        double luongTong = luongTongCaCongTy(list);
+                        System.out.println("Luong tong cua ca cong ti la: " + luongTong);
+                    }catch (Exception e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 2:
-                    double luongTongFullTime = tinhTongLuongFullTime(list);
+                    double luongTongFullTime = fullTime.tinhTongLuongFullTime(list);
                     System.out.println("Luong tong cua nhan vien full time la: " + luongTongFullTime);
                     break;
                 case 3:
-                    double luongTongPartTime = tinhTongLuongPartTime(list);
+                    double luongTongPartTime = partTime.tinhTongLuongPartTime(list);
                     System.out.println("Luong tong cua nhan vien part time la: " + luongTongPartTime);
                     break;
             }
@@ -168,7 +145,7 @@ public class Manager {
             System.out.println("0.Thoat");
             System.out.println("Lua chon cua ban: ");
             choice = Integer.parseInt(scanner.nextLine());
-            suaThongTinFullTimePartTime(scanner, list, choice, nhanVien1, nhanVien2, index, flag);
+            suaThongTinNhanVien(scanner, list, choice, nhanVien1, nhanVien2, index, flag);
             writeFile(list);
         }while (choice != 0) ;
     }
@@ -192,31 +169,33 @@ public class Manager {
         }
     }
 
-    private void suaThongTinFullTimePartTime(Scanner scanner, List<NhanVien> list, int choice, NhanVienFullTime nhanVien1, NhanVienPartTime nhanVien2, int index, boolean flag) {
+    private void suaThongTinNhanVien(Scanner scanner, List<NhanVien> list, int choice, NhanVienFullTime nhanVien1, NhanVienPartTime nhanVien2, int index, boolean flag) {
+        ManagerPartTime partTime = new ManagerPartTime();
+        ManagerFullTime fullTime = new ManagerFullTime();
         switch (choice) {
             case 1:
                 System.out.println("1.Ten Nhan Vien: " + list.get(index).getTen());
-                suaThongTinNVKieuChu(scanner, list, index,1);break;
+                suaThongTinNhanVienKieuChu(scanner, list, index,1);break;
             case 2:
                 System.out.println("2.So Dien Thoai Nhan Vien: " + list.get(index).getSoDT());
-                suaThongTinNVKieuChu(scanner, list, index,3);break;
+                suaThongTinNhanVienKieuChu(scanner, list, index,3);break;
             case 3:
                 System.out.println("3.Email Nhan Vien: " + list.get(index).getEmail());
-                suaThongTinNVKieuChu(scanner, list, index,2);break;
+                suaThongTinNhanVienKieuChu(scanner, list, index,2);break;
             case 4: if (flag) {
-                    System.out.println("4,Luong cung cua nhan vien: " + nhanVien1.getLuong());
-                suaThongTinFullTime(scanner, nhanVien1,1);
+                System.out.println("4,Luong cung cua nhan vien: " + nhanVien1.getLuong());
+                fullTime.suaThongTinFullTime(scanner, nhanVien1,1);
                 } else {
-                    System.out.println("4.Gio lam cua nhan vien: " + nhanVien2.getGioLam());
-                    suaThongTinPartTime(scanner, nhanVien2);
+                System.out.println("4.Gio lam cua nhan vien: " + nhanVien2.getGioLam());
+                    partTime.suaThongTinPartTime(scanner, nhanVien2);
                 }break;
             case 5: if (flag) {
-                    System.out.println("5.Tien thuong cua nhan vien: " + nhanVien1.getTienThuong());
-                suaThongTinFullTime(scanner, nhanVien1,2);
+                System.out.println("5.Tien thuong cua nhan vien: " + nhanVien1.getTienThuong());
+                fullTime.suaThongTinFullTime(scanner, nhanVien1,2);
                 }break;
             case 6:if (flag) {
-                    System.out.println("6.Tien phat cua nhan vien: " + nhanVien1.getTienPhat());
-                    suaThongTinFullTime(scanner, nhanVien1,3);
+                System.out.println("6.Tien phat cua nhan vien: " + nhanVien1.getTienPhat());
+                fullTime.suaThongTinFullTime(scanner, nhanVien1,3);
                 }break;
         }
     }
@@ -233,8 +212,7 @@ public class Manager {
         }
         return flag;
     }
-
-    private void suaThongTinNVKieuChu(Scanner scanner, List<NhanVien> list, int index,int choice) {
+    private void suaThongTinNhanVienKieuChu(Scanner scanner, List<NhanVien> list, int index,int choice) {
             String text = scanner.nextLine();
             if (!Objects.equals(text, "")) {
                     switch (choice){
@@ -251,42 +229,6 @@ public class Manager {
                     }
             }
     }
-    private void suaThongTinPartTime(Scanner scanner, NhanVienPartTime nhanVien2) {
-        boolean flag;
-        do {
-            flag = false;
-            String text = scanner.nextLine();
-            if (!Objects.equals(text, "")) {
-                try {
-                    double num = Double.parseDouble(text);
-                    nhanVien2.setGioLam(num);
-                }catch (Exception exceptions){
-                    System.err.println("Nhap du lieu dang so: ");
-                    flag = true;
-                }
-            }
-        }while (flag);
-    }
-    private void suaThongTinFullTime(Scanner scanner, NhanVienFullTime nhanVien1, int choice) {
-        boolean flag;
-        do {
-            flag = false;
-            String text = scanner.nextLine();
-            if (!Objects.equals(text, "")) {
-                try {
-                    double num = Double.parseDouble(text);
-                    switch (choice){
-                        case 1:nhanVien1.setLuong(num);break;
-                        case 2: nhanVien1.setTienThuong(num);break;
-                        case 3: nhanVien1.setTienPhat(num);break;
-                    }
-                }catch (Exception exceptions){
-                    System.err.println("Nhap du lieu dang so: ");
-                    flag = true;
-                }
-            }
-        }while (flag);
-    }
     public void xoaThongTinNhanVien(Scanner scanner,List<NhanVien> list){
         hienThiThongTinNhanVien(scanner,list);
         System.out.println("Ban co muon xoa thong tin nhan vien: "+list.get(index).getTen());
@@ -297,7 +239,7 @@ public class Manager {
             writeFile(list);
         }
     }
-    public void writeFile( List<NhanVien> list){
+    public static void writeFile( List<NhanVien> list){
         try{
             FileOutputStream fos = new FileOutputStream(PATH_NHAN_VIEN);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -309,13 +251,11 @@ public class Manager {
         }
     }
     public static List<NhanVien> readFile(){
-        List<NhanVien> listFull ;
         List<NhanVien> list = new ArrayList<NhanVien>();
         try {
             FileInputStream in = new FileInputStream(PATH_NHAN_VIEN);
             ObjectInputStream ois = new ObjectInputStream(in);
-            listFull = (List<NhanVien>) ois.readObject();
-           list = listFull;
+            list = (List<NhanVien>) ois.readObject() ;
         }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
